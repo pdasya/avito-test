@@ -1,0 +1,11 @@
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+}
