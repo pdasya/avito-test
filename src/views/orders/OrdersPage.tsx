@@ -40,7 +40,7 @@ const OrdersPage: React.FC = () => {
   return (
     <div>
       <h1>Список заказов</h1>
-      <OrderList orders={orders} onCompleteOrder={handleCompleteOrder} />
+      <OrderList onCompleteOrder={handleCompleteOrder} />
     </div>
   );
 };
