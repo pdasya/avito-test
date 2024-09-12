@@ -1,8 +1,75 @@
-import { FC } from "react";
+import { useEffect, useState } from "react";
 import AdList from "../../components/AdList/AdList";
+import { Advertisment } from "../../../types";
+import { fetchAds } from "../../api/fetchAds";
 
-const AdPage: FC = () => {
-  return <AdList />;
+import styles from "./AdPage.module.css";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import Pagination from "../../components/Pagination/Pagination";
+import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
+import { SelectChangeEvent } from "@mui/material";
+
+const AdPage: React.FC = () => {
+  const [ads, setAds] = useState<Advertisment[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [adsPerPage, setAdsPerPage] = useState(10);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const loadAds = async () => {
+      const data = await fetchAds();
+      setAds(data);
+    };
+
+    loadAds();
+  }, []);
+
+  const filteredAds = ads.filter((ad) =>
+    ad.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  const indexOfLastAd = currentPage * adsPerPage;
+  const indexOfFirstAd = indexOfLastAd - adsPerPage;
+  const currentAds = filteredAds.slice(indexOfFirstAd, indexOfLastAd);
+
+  const totalPages = Math.ceil(filteredAds.length / adsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleAdsPerPageChange = (event: SelectChangeEvent<number>) => {
+    setAdsPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    setCurrentPage(1);
+  };
+
+  return (
+    <div className={styles.adPageWrapper}>
+      <SearchBar
+        searchQuery={searchQuery}
+        onSearchChange={handleSearchChange}
+      />
+      <AdList ads={currentAds} />
+      <div className={styles.paginationWrapper}>
+        {totalPages > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
+        <AdsPerPageSelector
+          adsPerPage={adsPerPage}
+          onAdsPerPageChange={handleAdsPerPageChange}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default AdPage;

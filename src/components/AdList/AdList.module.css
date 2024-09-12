@@ -4,9 +4,3 @@
   justify-content: space-around;
   align-items: center;
 }
-
-.paginationWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
