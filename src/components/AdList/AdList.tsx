@@ -1,11 +1,7 @@
 import { Grid } from "@mui/material";
 import AdItem from "../AdItem/AdItem";
 import styles from "./AdList.module.scss";
-import { Advertisment } from "@/types/types";
-
-interface AdListProps {
-  ads: Advertisment[];
-}
+import { AdListProps } from "@/types/interfaces";
 
 const AdList: React.FC<AdListProps> = ({ ads }) => {
   return (

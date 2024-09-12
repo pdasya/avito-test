@@ -1,17 +1,5 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
-
-interface FilterControlProps {
-  label: string;
-  value: number | "";
-  options: Array<{ value: number; label: string }>;
-  onChange: (event: SelectChangeEvent<number | "">) => void;
-}
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FilterControlProps } from "@/types/interfaces";
 
 const FilterControl: React.FC<FilterControlProps> = ({
   label,

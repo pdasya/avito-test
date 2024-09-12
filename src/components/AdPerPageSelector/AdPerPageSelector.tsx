@@ -1,16 +1,6 @@
 import { FC } from "react";
-import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  SelectChangeEvent,
-} from "@mui/material";
-
-interface AdsPerPageSelectorProps {
-  adsPerPage: number;
-  onAdsPerPageChange: (event: SelectChangeEvent<number>) => void;
-}
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { AdsPerPageSelectorProps } from "@/types/interfaces";
 
 const AdsPerPageSelector: FC<AdsPerPageSelectorProps> = ({
   adsPerPage,

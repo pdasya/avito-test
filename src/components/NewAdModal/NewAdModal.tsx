@@ -10,13 +10,7 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 import getNextAdId from "@utils/getNextAdId";
-import { Advertisment } from "@/types/types";
-
-interface CreateAdModalProps {
-  open: boolean;
-  onClose: () => void;
-  onCreate: (ad: Advertisment) => void;
-}
+import { CreateAdModalProps } from "@/types/interfaces";
 
 const CreateAdModal: React.FC<CreateAdModalProps> = ({
   open,

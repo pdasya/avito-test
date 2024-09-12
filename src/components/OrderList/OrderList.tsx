@@ -1,13 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import OrderItem from "../OrderItem/OrderItem";
-import { Order } from "@/types/types";
-
-interface OrderListProps {
-  orders: Order[];
-  filteredOrders: Order[];
-  onCompleteOrder: (orderId: string) => void;
-}
+import { OrderListProps } from "@/types/interfaces";
 
 const OrderList: React.FC<OrderListProps> = ({
   filteredOrders,

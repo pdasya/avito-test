@@ -14,12 +14,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styles from "./OrderItem.module.scss";
-import { Order } from "@/types/types";
-
-interface OrderItemProps {
-  order: Order;
-  onCompleteOrder: () => void;
-}
+import { OrderItemProps } from "@/types/interfaces";
 
 const OrderItem: React.FC<OrderItemProps> = ({ order, onCompleteOrder }) => {
   const [showItems, setShowItems] = useState(false);
