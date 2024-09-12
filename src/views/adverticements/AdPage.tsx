@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import AdList from "../../components/AdList/AdList";
 import { Advertisment } from "../../../types";
 import { fetchAds } from "../../api/fetchAds";
-
+import { Button, SelectChangeEvent } from "@mui/material";
 import styles from "./AdPage.module.css";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import Pagination from "../../components/Pagination/Pagination";
+import CreateAdModal from "../../components/NewAdModal/NewAdModal";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
-import { SelectChangeEvent } from "@mui/material";
 
 const AdPage: React.FC = () => {
   const [ads, setAds] = useState<Advertisment[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [adsPerPage, setAdsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const loadAds = async () => {
@@ -23,6 +24,10 @@ const AdPage: React.FC = () => {
 
     loadAds();
   }, []);
+
+  const handleCreateAd = (newAd: Advertisment) => {
+    setAds((prevAds) => [newAd, ...prevAds]);
+  };
 
   const filteredAds = ads.filter((ad) =>
     ad.name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -48,8 +53,24 @@ const AdPage: React.FC = () => {
     setCurrentPage(1);
   };
 
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className={styles.adPageWrapper}>
+      <Button variant="contained" color="primary" onClick={handleOpenModal}>
+        Создать новое объявление
+      </Button>
+      <CreateAdModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onCreate={handleCreateAd}
+      />
       <SearchBar
         searchQuery={searchQuery}
         onSearchChange={handleSearchChange}
@@ -63,6 +84,7 @@ const AdPage: React.FC = () => {
             onPageChange={handlePageChange}
           />
         )}
+
         <AdsPerPageSelector
           adsPerPage={adsPerPage}
           onAdsPerPageChange={handleAdsPerPageChange}

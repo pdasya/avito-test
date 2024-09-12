@@ -76,6 +76,36 @@
       "views": 200000,
       "likes": 302,
       "imageUrl": ""
+    },
+    {
+      "id": "6408",
+      "imageUrl": "",
+      "name": "Новый стул",
+      "description": "Классный новый стул",
+      "price": 500,
+      "views": 0,
+      "likes": 0,
+      "createdAt": "2024-09-12T02:53:28.450Z"
+    },
+    {
+      "id": "c7cc",
+      "imageUrl": "https://trikky.ru/wp-content/blogs.dir/1/files/2023/03/23/zyro-image-11.jpg",
+      "name": "Что-то новое",
+      "description": "Дяддядяд",
+      "price": 111111,
+      "views": 0,
+      "likes": 0,
+      "createdAt": "2024-09-12T02:55:29.963Z"
+    },
+    {
+      "id": "ebf7",
+      "imageUrl": "/no-image.svg",
+      "name": "Новый стул",
+      "description": "Новый стул прикольный",
+      "price": 44444,
+      "views": 0,
+      "likes": 0,
+      "createdAt": "2024-09-12T02:58:09.679Z"
     }
   ],
   "orders": [
