@@ -63,6 +63,7 @@ const AdPage: React.FC = () => {
 
   return (
     <div className={styles.adPageWrapper}>
+      <h1>Объявления</h1>
       <Button variant="contained" color="primary" onClick={handleOpenModal}>
         Создать новое объявление
       </Button>
