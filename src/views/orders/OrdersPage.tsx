@@ -15,7 +15,6 @@ const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<number | "">("");
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(10);
@@ -41,7 +40,6 @@ const OrdersPage: React.FC = () => {
       setFilteredOrders(filtered);
       setIsLoading(false);
     } catch (err) {
-      setError("Ошибка при загрузке заказов");
       setIsLoading(false);
       console.error(err);
     }

@@ -3,7 +3,7 @@ import styles from "./Loader.module.scss";
 
 const Loader: FC = () => {
   return (
-    <div className={styles.overlay}>
+    <div className={styles.overlay} data-testid="loader">
       <span className={styles.loader} data-testid="loader">
         <span className={styles.loaderInner}></span>
       </span>
