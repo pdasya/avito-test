@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Order } from "../../../types";
 import { Button, SelectChangeEvent } from "@mui/material";
 import OrderList from "../../components/OrderList/OrderList";
-import { fetchOrders } from "../../api/fetchOrders";
+import apiService from "../../api/apiService";
 import FilterControl from "../../components/FilterControl/FilterControl";
 import Pagination from "../../components/Pagination/Pagination";
 import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
@@ -27,7 +27,7 @@ const OrdersPage: React.FC = () => {
   const loadOrders = async (sortByPrice: boolean = false) => {
     setIsLoading(true);
     try {
-      const fetchedOrders = await fetchOrders(
+      const fetchedOrders = await apiService.fetchOrders(
         sortByPrice ? "total" : undefined,
       );
       setOrders(fetchedOrders);

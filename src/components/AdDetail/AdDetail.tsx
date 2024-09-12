@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Advertisment } from "../../../types";
-import { fetchAd } from "../../api/fetchAd";
+import apiService from "../../api/apiService";
 import axios from "axios";
 import {
   TextField,
@@ -30,7 +30,7 @@ const AdDetail: React.FC = () => {
   useEffect(() => {
     const loadAd = async () => {
       setIsLoading(true);
-      const adData = await fetchAd(id!);
+      const adData = await apiService.fetchAd(id!);
       setAd(adData);
       setFormData({
         imageUrl: adData?.imageUrl || "",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import AdList from "../../components/AdList/AdList";
 import { Advertisment } from "../../../types";
-import { fetchAds } from "../../api/fetchAds";
+import apiService from "../../api/apiService";
 import { Button, SelectChangeEvent } from "@mui/material";
 import styles from "./AdPage.module.scss";
 import Pagination from "../../components/Pagination/Pagination";
@@ -25,7 +25,7 @@ const AdPage: React.FC = () => {
   useEffect(() => {
     const loadAds = async () => {
       setIsLoading(true);
-      const data = await fetchAds();
+      const data = await apiService.fetchAds();
       setAds(data);
       setIsLoading(false);
     };
