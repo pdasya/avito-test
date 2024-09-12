@@ -1,12 +1,13 @@
+import { Advertisment, Order } from "@/types/types";
 import axios from "axios";
-import { Advertisment, Order } from "../types/types";
 import { toast } from "react-toastify";
 
 class ApiService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = "http://localhost:3000";
+    this.baseUrl =
+      process.env.REACT_APP_API_BASE_URL ?? "http://localhost:3000";
   }
 
   async fetchAd(id: string): Promise<Advertisment | null> {
