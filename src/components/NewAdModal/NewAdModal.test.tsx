@@ -95,15 +95,12 @@ describe("CreateAdModal component", () => {
   });
 
   test("handles errors when creating an ad", async () => {
-    // Убеждаемся, что getNextAdId возвращает корректное значение
     (getNextAdId as Mock).mockResolvedValueOnce(123);
 
-    // Мокаем ошибку для axios.post
     (axios.post as Mock).mockRejectedValueOnce(new Error("Failed to create"));
 
     setup();
 
-    // Заполняем поля
     fireEvent.change(screen.getByLabelText(/Название/i), {
       target: { value: "Test Ad" },
     });
@@ -114,16 +111,15 @@ describe("CreateAdModal component", () => {
       target: { value: 100 },
     });
 
-    // Нажимаем на кнопку "Создать"
     fireEvent.click(screen.getByText("Создать"));
 
-    // Ждем выполнения запроса и проверки, что ошибки были обработаны
     await waitFor(() => {
       expect(getNextAdId).toHaveBeenCalled();
       expect(axios.post).toHaveBeenCalled();
 
-      // Проверка вызова toast.error
-      expect(toast.error).toHaveBeenCalledWith("Ошибка создания объявления!");
+      expect(toast.error).toHaveBeenCalledWith(
+        "Ошибка создания объявления Error: Failed to create",
+      );
     });
   });
 });

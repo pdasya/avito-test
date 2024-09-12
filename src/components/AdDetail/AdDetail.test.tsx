@@ -115,7 +115,9 @@ describe("AdDetail component", () => {
     fireEvent.click(screen.getByText(/сохранить/i));
 
     await waitFor(() => {
-      expect(toast.error).toHaveBeenCalledWith("Ошибка обновления данных");
+      expect(toast.error).toHaveBeenCalledWith(
+        "Ошибка обновления данных Error: Failed to update",
+      );
     });
   });
 });

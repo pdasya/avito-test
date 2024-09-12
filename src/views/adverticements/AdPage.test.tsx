@@ -4,7 +4,6 @@ import AdPage from "./AdPage";
 import apiService from "@api/apiService";
 import { Advertisment } from "@/types/types";
 
-// Моки компонентов с использованием правильной типизации
 vi.mock("@api/apiService");
 vi.mock("@components/Loader/Loader", () => ({
   __esModule: true,

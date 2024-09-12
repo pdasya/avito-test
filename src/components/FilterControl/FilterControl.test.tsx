@@ -10,7 +10,7 @@ describe("FilterControl component", () => {
     label: "Фильтр",
     value: "",
     options: [
-      { value: 1, label: "Option 1" }, // числовые значения
+      { value: 1, label: "Option 1" },
       { value: 2, label: "Option 2" },
       { value: 3, label: "Option 3" },
     ],
