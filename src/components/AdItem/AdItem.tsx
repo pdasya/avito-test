@@ -9,6 +9,7 @@ import {
 import { Favorite, Visibility } from "@mui/icons-material";
 import styles from "./AdItem.module.css";
 import { Advertisment } from "../../../types";
+import { useNavigate } from "react-router-dom";
 
 const AdItem: React.FC<Advertisment> = ({
   imageUrl,
@@ -16,15 +17,21 @@ const AdItem: React.FC<Advertisment> = ({
   price,
   views,
   likes,
+  id,
 }) => {
   const [isFavorited, setIsFavorited] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/advertisements/${id}`);
+  };
 
   const handleFavoriteClick = () => {
     setIsFavorited(!isFavorited);
   };
 
   return (
-    <Card className={styles.cardWrapper}>
+    <Card className={styles.cardWrapper} onClick={handleClick}>
       <CardMedia
         component="img"
         image={imageUrl}
