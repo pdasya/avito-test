@@ -10,6 +10,7 @@ import {
 import { Advertisment } from "../../../types";
 import axios from "axios";
 import getNextAdId from "../../utils/getNextAdId";
+import { toast } from "react-toastify";
 
 interface CreateAdModalProps {
   open: boolean;
@@ -51,8 +52,10 @@ const CreateAdModal: React.FC<CreateAdModalProps> = ({
       const createdAd = response.data;
       onCreate(createdAd);
       onClose();
+      toast.success("Новое объявление успешно создано!");
     } catch (error) {
       console.error("Error creating adverticement", error);
+      toast.error("Ошибка создания объявления!");
     }
 
     setImageUrl("");

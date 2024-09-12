@@ -9,6 +9,7 @@ import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSele
 import { useSearchParams } from "react-router-dom";
 import styles from "./OrdersPage.module.scss";
 import Loader from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -63,8 +64,8 @@ const OrdersPage: React.FC = () => {
     setCurrentPage(1);
   };
 
-  const handleCompleteOrder = (orderId: string) => {
-    console.log(`Заказ ${orderId} завершен`);
+  const handleCompleteOrder = () => {
+    toast.success("Заказ успешно завершен (тест)");
   };
 
   const handleSortByPrice = () => {

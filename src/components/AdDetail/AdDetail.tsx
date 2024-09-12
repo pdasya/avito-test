@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import styles from "./AdDetails.module.scss";
 import Loader from "../Loader/Loader";
+import { toast } from "react-toastify";
 
 const AdDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -61,9 +62,11 @@ const AdDetail: React.FC = () => {
 
       await axios.put(`http://localhost:3000/advertisements/${id}`, updatedAd);
       setAd(updatedAd);
+      toast.success("Данные о товаре успешно обновлены");
       setIsEditing(false);
     } catch (error) {
       console.error("Ошибка при сохранении изменений", error);
+      toast.error("Ошибка обновления данных");
     }
   };
 
