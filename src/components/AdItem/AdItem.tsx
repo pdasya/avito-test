@@ -27,7 +27,8 @@ const AdItem: React.FC<Advertisment> = ({
     navigate(`/advertisements/${id}`);
   };
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
     setIsFavorited(!isFavorited);
   };
 

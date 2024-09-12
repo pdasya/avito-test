@@ -131,25 +131,31 @@ const OrdersPage: React.FC = () => {
             </p>
           )}
 
-          <OrderList
-            orders={orders}
-            filteredOrders={currentOrders}
-            onCompleteOrder={handleCompleteOrder}
-          />
-
-          <div style={{ marginTop: "20px" }}>
-            {totalPages > 0 && (
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
+          {filteredOrders.length === 0 ? (
+            <p>По вашему запросу ничего не найдено</p>
+          ) : (
+            <>
+              <OrderList
+                orders={orders}
+                filteredOrders={currentOrders}
+                onCompleteOrder={handleCompleteOrder}
               />
-            )}
-            <AdsPerPageSelector
-              adsPerPage={ordersPerPage}
-              onAdsPerPageChange={handleOrdersPerPageChange}
-            />
-          </div>
+
+              <div style={{ marginTop: "20px" }}>
+                {totalPages > 0 && (
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
+                )}
+                <AdsPerPageSelector
+                  adsPerPage={ordersPerPage}
+                  onAdsPerPageChange={handleOrdersPerPageChange}
+                />
+              </div>
+            </>
+          )}
         </div>
       )}
     </>

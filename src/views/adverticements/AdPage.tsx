@@ -159,7 +159,11 @@ const AdPage: React.FC = () => {
             />
           </div>
 
-          <AdList ads={currentAds} />
+          {currentAds.length === 0 ? (
+            <p>По вашему запросу ничего не найдено</p>
+          ) : (
+            <AdList ads={currentAds} />
+          )}
 
           <div className={styles.paginationWrapper}>
             {totalPages > 0 && (

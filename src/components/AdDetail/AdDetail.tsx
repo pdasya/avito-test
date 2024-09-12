@@ -1,13 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  TextField,
-  Button,
-  Grid,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { TextField, Button, Grid, Typography } from "@mui/material";
 import styles from "./AdDetails.module.scss";
 import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
@@ -34,9 +28,9 @@ const AdDetail: React.FC = () => {
       setAd(adData);
       setFormData({
         imageUrl: adData?.imageUrl || "",
-        name: adData?.name || "",
-        description: adData?.description || "",
-        price: adData?.price.toString() || "",
+        name: adData?.name || "Название не указано",
+        description: adData?.description || "Описание недоступно",
+        price: adData?.price.toString() || "0",
       });
       setIsLoading(false);
     };
@@ -73,15 +67,6 @@ const AdDetail: React.FC = () => {
   const handleClose = () => {
     navigate("/advertisements");
   };
-
-  if (isLoading) {
-    return (
-      <div className={styles.loaderWrapper}>
-        <CircularProgress />
-        <p>Загрузка объявления...</p>
-      </div>
-    );
-  }
 
   if (!ad) {
     return <div>Объявление не найдено</div>;
@@ -160,14 +145,14 @@ const AdDetail: React.FC = () => {
           ) : (
             <div className={styles.detailsWrapper}>
               <Typography variant="h4" className={styles.detailsWrapperHeader}>
-                {ad.name}
+                {ad.name || "Название не указано"}
               </Typography>
               <img
                 src={ad.imageUrl}
                 alt={ad.name}
                 style={{ width: "300px", height: "auto" }}
               />
-              <p>Описание: {ad.description}</p>
+              <p>Описание: {ad.description || "Описание недоступно"}</p>
               <p>Стоимость: {ad.price} ₽</p>
               <p>Просмотры: {ad.views}</p>
               <p>Лайки: {ad.likes}</p>
