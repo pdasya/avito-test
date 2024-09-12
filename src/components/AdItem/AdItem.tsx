@@ -8,28 +8,21 @@ import {
 } from "@mui/material";
 import { Favorite, Visibility } from "@mui/icons-material";
 import styles from "./AdItem.module.css";
+import { Advertisment } from "../../../types";
 
-interface AdItemProps {
-  image: string;
-  title: string;
-  price: number;
-  views: number;
-  likes: number;
-}
-
-const AdItem: React.FC<AdItemProps> = ({
-  image,
-  title,
+const AdItem: React.FC<Advertisment> = ({
+  imageUrl,
+  name,
   price,
   views,
   likes,
 }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component="img" height="140" image={image} alt={title} />
+      <CardMedia component="img" height="140" image={imageUrl} alt={name} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Стоимость: {price} ₽
