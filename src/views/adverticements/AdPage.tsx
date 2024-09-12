@@ -104,66 +104,69 @@ const AdPage: React.FC = () => {
         onSearchChange={handleSearchChange}
       />
 
-      <FilterControl
-        label="Фильтр по цене"
-        value={priceFilter}
-        options={[
-          { value: 0, label: "До 1000 ₽" },
-          { value: 1, label: "1000-5000 ₽" },
-          { value: 2, label: "Более 5000 ₽" },
-        ]}
-        onChange={(event) =>
-          setPriceFilter(
-            event.target.value === "" ? "" : Number(event.target.value),
-          )
-        }
-      />
+      <div className={styles.filtersWrapper}>
+        <FilterControl
+          label="Фильтр по цене"
+          value={priceFilter}
+          options={[
+            { value: 0, label: "До 1000 ₽" },
+            { value: 1, label: "1000-5000 ₽" },
+            { value: 2, label: "Более 5000 ₽" },
+          ]}
+          onChange={(event) =>
+            setPriceFilter(
+              event.target.value === "" ? "" : Number(event.target.value),
+            )
+          }
+        />
 
-      <FilterControl
-        label="Фильтр по просмотрам"
-        value={viewsFilter}
-        options={[
-          { value: 0, label: "До 100 просмотров" },
-          { value: 1, label: "100-1000 просмотров" },
-          { value: 2, label: "Более 1000 просмотров" },
-        ]}
-        onChange={(event) =>
-          setViewsFilter(
-            event.target.value === "" ? "" : Number(event.target.value),
-          )
-        }
-      />
+        <FilterControl
+          label="Фильтр по просмотрам"
+          value={viewsFilter}
+          options={[
+            { value: 0, label: "До 100 просмотров" },
+            { value: 1, label: "100-1000 просмотров" },
+            { value: 2, label: "Более 1000 просмотров" },
+          ]}
+          onChange={(event) =>
+            setViewsFilter(
+              event.target.value === "" ? "" : Number(event.target.value),
+            )
+          }
+        />
 
-      <FilterControl
-        label="Фильтр по лайкам"
-        value={likesFilter}
-        options={[
-          { value: 0, label: "До 10 лайков" },
-          { value: 1, label: "10-100 лайков" },
-          { value: 2, label: "Более 100 лайков" },
-        ]}
-        onChange={(event) =>
-          setLikesFilter(
-            event.target.value === "" ? "" : Number(event.target.value),
-          )
-        }
-      />
+        <FilterControl
+          label="Фильтр по лайкам"
+          value={likesFilter}
+          options={[
+            { value: 0, label: "До 10 лайков" },
+            { value: 1, label: "10-100 лайков" },
+            { value: 2, label: "Более 100 лайков" },
+          ]}
+          onChange={(event) =>
+            setLikesFilter(
+              event.target.value === "" ? "" : Number(event.target.value),
+            )
+          }
+        />
+      </div>
 
       <AdList ads={currentAds} />
 
       <div className={styles.paginationWrapper}>
         {totalPages > 0 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+          <>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+            <AdsPerPageSelector
+              adsPerPage={adsPerPage}
+              onAdsPerPageChange={handleAdsPerPageChange}
+            />
+          </>
         )}
-
-        <AdsPerPageSelector
-          adsPerPage={adsPerPage}
-          onAdsPerPageChange={handleAdsPerPageChange}
-        />
       </div>
     </div>
   );

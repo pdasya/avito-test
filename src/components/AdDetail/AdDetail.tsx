@@ -4,6 +4,7 @@ import { Advertisment } from "../../../types";
 import { fetchAd } from "../../api/fetchAd";
 import axios from "axios";
 import { TextField, Button, Grid, Typography } from "@mui/material";
+import styles from "./AdDetails.module.scss";
 
 const AdDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -67,8 +68,10 @@ const AdDetail: React.FC = () => {
   return (
     <div>
       {isEditing ? (
-        <div>
-          <Typography variant="h5">Редактировать объявление</Typography>
+        <div className={styles.detailsEditWrapper}>
+          <Typography variant="h5" className={styles.detailsEditWrapperHeader}>
+            Редактировать объявление
+          </Typography>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -126,8 +129,10 @@ const AdDetail: React.FC = () => {
           </Button>
         </div>
       ) : (
-        <div>
-          <Typography variant="h4">{ad.name}</Typography>
+        <div className={styles.detailsWrapper}>
+          <Typography variant="h4" className={styles.detailsWrapperHeader}>
+            {ad.name}
+          </Typography>
           <img
             src={ad.imageUrl}
             alt={ad.name}

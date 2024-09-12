@@ -7,3 +7,9 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.filtersWrapper {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}

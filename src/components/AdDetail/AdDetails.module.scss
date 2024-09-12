@@ -1,0 +1,18 @@
+.detailsWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+
+  &Header {
+    margin-top: 15px !important;
+  }
+}
+
+.detailsEditWrapper {
+  padding: 20px;
+
+  &Header {
+    margin-bottom: 20px !important;
+  }
+}

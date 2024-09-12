@@ -22,7 +22,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
   return (
     <FormControl
       variant="outlined"
-      style={{ minWidth: 150, marginBottom: "20px", marginLeft: "20px" }}
+      style={{ minWidth: 320, marginBottom: "20px" }}
     >
       <InputLabel>{label}</InputLabel>
       <Select value={value} onChange={onChange} label={label}>

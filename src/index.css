@@ -1,6 +1,6 @@
 @font-face {
   font-family: "RubicMonoOne";
-  src: url("../public/RubikMonoOne-Regular.ttf");
+  src: url("/RubikMonoOne-Regular.ttf");
   font-weight: 400;
   font-style: normal;
 }

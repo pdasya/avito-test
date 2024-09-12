@@ -7,6 +7,7 @@ import FilterControl from "../../components/FilterControl/FilterControl";
 import Pagination from "../../components/Pagination/Pagination";
 import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
 import { useSearchParams } from "react-router-dom";
+import styles from "./OrdersPage.module.scss";
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -97,7 +98,7 @@ const OrdersPage: React.FC = () => {
   const isItemFound = filteredOrders.length > 0;
 
   return (
-    <div>
+    <div className={styles.orderPageWrapper}>
       <h1>Список заказов</h1>
 
       <FilterControl
@@ -115,7 +116,12 @@ const OrdersPage: React.FC = () => {
         onChange={handleStatusFilterChange}
       />
 
-      <Button variant="contained" color="primary" onClick={handleSortByPrice}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSortByPrice}
+        className={styles.sortButton}
+      >
         Сортировать по цене
       </Button>
 

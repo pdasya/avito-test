@@ -14,13 +14,14 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Order } from "../../../types";
+import styles from "./OrderItem.module.scss";
 
-interface OrderCardProps {
+interface OrderItemProps {
   order: Order;
   onCompleteOrder: () => void;
 }
 
-const OrderCard: React.FC<OrderCardProps> = ({ order, onCompleteOrder }) => {
+const OrderItem: React.FC<OrderItemProps> = ({ order, onCompleteOrder }) => {
   const [showItems, setShowItems] = useState(false);
   const navigate = useNavigate();
 
@@ -97,6 +98,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onCompleteOrder }) => {
                 key={item.id}
                 component="button"
                 onClick={() => handleItemClick(item.id)}
+                className={styles.listItem}
               >
                 <ListItemText
                   primary={`${item.name} - ${item.count} шт. - ${item.price} ₽`}
@@ -115,4 +117,4 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onCompleteOrder }) => {
   );
 };
 
-export default OrderCard;
+export default OrderItem;
