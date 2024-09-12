@@ -3,7 +3,7 @@ import AdList from "../../components/AdList/AdList";
 import { Advertisment } from "../../../types";
 import { fetchAds } from "../../api/fetchAds";
 import { Button, SelectChangeEvent } from "@mui/material";
-import styles from "./AdPage.module.css";
+import styles from "./AdPage.module.scss";
 import Pagination from "../../components/Pagination/Pagination";
 import CreateAdModal from "../../components/NewAdModal/NewAdModal";
 import SearchBar from "../../components/SearchBar/SearchBar";

@@ -20,18 +20,18 @@
     background-color 0.3s,
     color 0.3s,
     transform 0.3s;
-}
 
-.paginationButton:not(:disabled):hover {
-  background-color: white;
-  color: black;
-  transform: scale(1.1);
-}
+  &:not(:disabled):hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.1);
+  }
 
-.paginationButton:disabled {
-  background-color: #333;
-  color: #777;
-  cursor: not-allowed;
+  &:disabled {
+    background-color: #333;
+    color: #777;
+    cursor: not-allowed;
+  }
 }
 
 .active {

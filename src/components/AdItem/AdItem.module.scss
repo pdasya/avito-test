@@ -6,10 +6,13 @@
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-}
+  background-color: #f5f5f0;
+  transition: background-color 0.3s ease-in-out;
 
-.cardWrapper:hover {
-  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    background-color: #ffefdb;
+  }
 }
 
 .cardContent {

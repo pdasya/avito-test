@@ -8,7 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import { Favorite, Visibility } from "@mui/icons-material";
-import styles from "./AdItem.module.css";
+import styles from "./AdItem.module.scss";
 import { Advertisment } from "../../../types";
 import { useNavigate } from "react-router-dom";
 
