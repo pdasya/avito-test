@@ -1,4 +1,5 @@
 import React, { Component, ReactNode } from "react";
+import { toast } from "react-toastify";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -23,7 +24,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("Error caught by ErrorBoundary:", error, errorInfo);
+    toast.error(`Ошибка пойманная ErrorBoundary:${error} ${errorInfo}`);
   }
 
   resetError = () => {

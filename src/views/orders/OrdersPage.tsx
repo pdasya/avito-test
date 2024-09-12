@@ -41,7 +41,7 @@ const OrdersPage: React.FC = () => {
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
-      console.error(err);
+      toast.error(`Ошибка загрузки ${err}`);
     }
   };
 

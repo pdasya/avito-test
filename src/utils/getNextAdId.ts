@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const getNextAdId = async (): Promise<string> => {
   try {
@@ -7,7 +8,7 @@ const getNextAdId = async (): Promise<string> => {
     const maxId = ads.length;
     return String(maxId + 1);
   } catch (error) {
-    console.error("Ошибка при получении объявлений", error);
+    toast.error(`"Ошибка при получении объявлений ${error}`);
     return String(1);
   }
 };

@@ -59,8 +59,7 @@ const AdDetail: React.FC = () => {
       toast.success("Данные о товаре успешно обновлены");
       setIsEditing(false);
     } catch (error) {
-      console.error("Ошибка при сохранении изменений", error);
-      toast.error("Ошибка обновления данных");
+      toast.error(`Ошибка обновления данных ${error}`);
     }
   };
 

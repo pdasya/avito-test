@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Advertisment, Order } from "../types/types";
+import { toast } from "react-toastify";
 
 class ApiService {
   private baseUrl: string;
@@ -19,7 +20,7 @@ class ApiService {
 
       return adData;
     } catch (error) {
-      console.error("Ошибка при загрузке объявления:", error);
+      toast.error(`Ошибка при загрузке объявления:${error}`);
       return null;
     }
   }
@@ -43,7 +44,7 @@ class ApiService {
 
       return updatedData;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error(`Ошибка при загрузке объявления:${error}`);
       return [];
     }
   }
@@ -59,7 +60,7 @@ class ApiService {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      toast.error(`Ошибка при загрузке объявления:${error}`);
       return [];
     }
   }

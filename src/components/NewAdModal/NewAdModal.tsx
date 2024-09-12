@@ -48,8 +48,7 @@ const CreateAdModal: React.FC<CreateAdModalProps> = ({
       onClose();
       toast.success("Новое объявление успешно создано!");
     } catch (error) {
-      console.error("Error creating adverticement", error);
-      toast.error("Ошибка создания объявления!");
+      toast.error(`Ошибка создания объявления ${error}`);
     }
 
     setImageUrl("");
