@@ -4,6 +4,8 @@ import { Button, SelectChangeEvent } from "@mui/material";
 import OrderList from "../../components/OrderList/OrderList";
 import { fetchOrders } from "../../api/fetchOrders";
 import FilterControl from "../../components/FilterControl/FilterControl";
+import Pagination from "../../components/Pagination/Pagination";
+import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -11,6 +13,8 @@ const OrdersPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<number | "">("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ordersPerPage, setOrdersPerPage] = useState(10);
 
   const loadOrders = async (sortByPrice: boolean = false) => {
     setLoading(true);
@@ -42,6 +46,7 @@ const OrdersPage: React.FC = () => {
       const filtered = orders.filter((order) => order.status === status);
       setFilteredOrders(filtered);
     }
+    setCurrentPage(1);
   };
 
   const handleCompleteOrder = (orderId: string) => {
@@ -50,6 +55,23 @@ const OrdersPage: React.FC = () => {
 
   const handleSortByPrice = () => {
     loadOrders(true);
+  };
+
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = filteredOrders.slice(
+    indexOfFirstOrder,
+    indexOfLastOrder,
+  );
+  const totalPages = Math.ceil(filteredOrders.length / ordersPerPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleOrdersPerPageChange = (event: SelectChangeEvent<number>) => {
+    setOrdersPerPage(Number(event.target.value));
+    setCurrentPage(1);
   };
 
   if (loading) {
@@ -67,6 +89,7 @@ const OrdersPage: React.FC = () => {
   return (
     <div>
       <h1>Список заказов</h1>
+
       <FilterControl
         label="Фильтр по статусу"
         value={statusFilter}
@@ -81,14 +104,29 @@ const OrdersPage: React.FC = () => {
         ]}
         onChange={handleStatusFilterChange}
       />
+
       <Button variant="contained" color="primary" onClick={handleSortByPrice}>
         Сортировать по цене
       </Button>
+
       <OrderList
         orders={orders}
-        filteredOrders={filteredOrders}
+        filteredOrders={currentOrders}
         onCompleteOrder={handleCompleteOrder}
       />
+      <div style={{ marginTop: "20px" }}>
+        {totalPages > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
+        <AdsPerPageSelector
+          adsPerPage={ordersPerPage}
+          onAdsPerPageChange={handleOrdersPerPageChange}
+        />
+      </div>
     </div>
   );
 };
