@@ -27,7 +27,7 @@ export enum OrderStatus {
   Refund = 6,
 }
 
-type OrderItem = Advertisment & { count: number };
+export type OrderItem = Advertisment & { count: number };
 
 export type Order = {
   /* Уникальный идентификатор. */

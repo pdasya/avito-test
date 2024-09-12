@@ -5,6 +5,7 @@ import {
   CardMedia,
   Typography,
   IconButton,
+  Button,
 } from "@mui/material";
 import { Favorite, Visibility } from "@mui/icons-material";
 import styles from "./AdItem.module.css";
@@ -28,6 +29,11 @@ const AdItem: React.FC<Advertisment> = ({
 
   const handleFavoriteClick = () => {
     setIsFavorited(!isFavorited);
+  };
+
+  const handleOrdersClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    navigate(`/orders?advertId=${id}&name=${name}`);
   };
 
   return (
@@ -61,6 +67,14 @@ const AdItem: React.FC<Advertisment> = ({
             <Typography variant="body2" color="text.secondary">
               {likes} лайков
             </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOrdersClick}
+              style={{ marginTop: "10px" }}
+            >
+              Заказы
+            </Button>
           </div>
         </div>
       </CardContent>

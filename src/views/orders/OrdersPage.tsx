@@ -6,6 +6,7 @@ import { fetchOrders } from "../../api/fetchOrders";
 import FilterControl from "../../components/FilterControl/FilterControl";
 import Pagination from "../../components/Pagination/Pagination";
 import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
+import { useSearchParams } from "react-router-dom";
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -15,6 +16,10 @@ const OrdersPage: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<number | "">("");
   const [currentPage, setCurrentPage] = useState(1);
   const [ordersPerPage, setOrdersPerPage] = useState(10);
+  const [searchParams] = useSearchParams();
+
+  const advertId = searchParams.get("advertId");
+  const advertName = searchParams.get("name");
 
   const loadOrders = async (sortByPrice: boolean = false) => {
     setLoading(true);
@@ -23,7 +28,14 @@ const OrdersPage: React.FC = () => {
         sortByPrice ? "total" : undefined,
       );
       setOrders(fetchedOrders);
-      setFilteredOrders(fetchedOrders);
+
+      const filtered = advertId
+        ? fetchedOrders.filter((order: Order) =>
+            order.items.some((item) => item.id === advertId),
+          )
+        : fetchedOrders;
+
+      setFilteredOrders(filtered);
       setLoading(false);
     } catch (err) {
       setError("Ошибка при загрузке заказов");
@@ -34,7 +46,7 @@ const OrdersPage: React.FC = () => {
 
   useEffect(() => {
     loadOrders();
-  }, []);
+  }, [advertId]);
 
   const handleStatusFilterChange = (event: SelectChangeEvent<number | "">) => {
     const status = event.target.value as number | "";
@@ -82,9 +94,7 @@ const OrdersPage: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  if (orders.length === 0) {
-    return <div>Заказы отсутствуют</div>;
-  }
+  const isItemFound = filteredOrders.length > 0;
 
   return (
     <div>
@@ -109,11 +119,20 @@ const OrdersPage: React.FC = () => {
         Сортировать по цене
       </Button>
 
+      {advertName && (
+        <p>
+          {isItemFound
+            ? `Предмет "${advertName}" был найден в этих заказах`
+            : `Этот предмет "${advertName}" не был найден ни в одном заказе`}
+        </p>
+      )}
+
       <OrderList
         orders={orders}
         filteredOrders={currentOrders}
         onCompleteOrder={handleCompleteOrder}
       />
+
       <div style={{ marginTop: "20px" }}>
         {totalPages > 0 && (
           <Pagination
