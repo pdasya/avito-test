@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Advertisment } from "../../../types";
 import axios from "axios";
+import getNextAdId from "../../utils/getNextAdId";
 
 interface CreateAdModalProps {
   open: boolean;
@@ -29,14 +30,17 @@ const CreateAdModal: React.FC<CreateAdModalProps> = ({
   const placeholderImageUrl = "/no-image.svg";
 
   const handleCreate = async () => {
+    const newId = await getNextAdId();
+
     const newAd = {
-      imageUrl: imageUrl || placeholderImageUrl,
+      id: newId,
       name,
       description,
       price: Number(price),
+      createdAt: new Date().toISOString(),
       views: 0,
       likes: 0,
-      createdAt: new Date().toISOString(),
+      imageUrl: imageUrl || placeholderImageUrl,
     };
 
     try {

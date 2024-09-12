@@ -26,7 +26,7 @@ const AdPage: React.FC = () => {
   }, []);
 
   const handleCreateAd = (newAd: Advertisment) => {
-    setAds((prevAds) => [newAd, ...prevAds]);
+    setAds((prevAds) => [...prevAds, newAd]);
   };
 
   const filteredAds = ads.filter((ad) =>
