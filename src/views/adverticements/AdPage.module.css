@@ -1,3 +1,7 @@
+.adPageWrapper {
+  padding: 20px;
+}
+
 .paginationWrapper {
   display: flex;
   align-items: center;
