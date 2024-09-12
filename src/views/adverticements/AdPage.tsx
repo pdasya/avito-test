@@ -9,6 +9,7 @@ import CreateAdModal from "../../components/NewAdModal/NewAdModal";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
 import FilterControl from "../../components/FilterControl/FilterControl";
+import Loader from "../../components/Loader/Loader";
 
 const AdPage: React.FC = () => {
   const [ads, setAds] = useState<Advertisment[]>([]);
@@ -19,11 +20,14 @@ const AdPage: React.FC = () => {
   const [viewsFilter, setViewsFilter] = useState<number | "">("");
   const [likesFilter, setLikesFilter] = useState<number | "">("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const loadAds = async () => {
+      setIsLoading(true);
       const data = await fetchAds();
       setAds(data);
+      setIsLoading(false);
     };
 
     loadAds();
@@ -89,86 +93,92 @@ const AdPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.adPageWrapper}>
-      <h1>Объявления</h1>
-      <Button variant="contained" color="primary" onClick={handleOpenModal}>
-        Создать новое объявление
-      </Button>
-      <CreateAdModal
-        open={isModalOpen}
-        onClose={handleCloseModal}
-        onCreate={handleCreateAd}
-      />
-      <SearchBar
-        searchQuery={searchQuery}
-        onSearchChange={handleSearchChange}
-      />
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.adPageWrapper}>
+          <h1>Объявления</h1>
+          <Button variant="contained" color="primary" onClick={handleOpenModal}>
+            Создать новое объявление
+          </Button>
+          <CreateAdModal
+            open={isModalOpen}
+            onClose={handleCloseModal}
+            onCreate={handleCreateAd}
+          />
+          <SearchBar
+            searchQuery={searchQuery}
+            onSearchChange={handleSearchChange}
+          />
 
-      <div className={styles.filtersWrapper}>
-        <FilterControl
-          label="Фильтр по цене"
-          value={priceFilter}
-          options={[
-            { value: 0, label: "До 1000 ₽" },
-            { value: 1, label: "1000-5000 ₽" },
-            { value: 2, label: "Более 5000 ₽" },
-          ]}
-          onChange={(event) =>
-            setPriceFilter(
-              event.target.value === "" ? "" : Number(event.target.value),
-            )
-          }
-        />
-
-        <FilterControl
-          label="Фильтр по просмотрам"
-          value={viewsFilter}
-          options={[
-            { value: 0, label: "До 100 просмотров" },
-            { value: 1, label: "100-1000 просмотров" },
-            { value: 2, label: "Более 1000 просмотров" },
-          ]}
-          onChange={(event) =>
-            setViewsFilter(
-              event.target.value === "" ? "" : Number(event.target.value),
-            )
-          }
-        />
-
-        <FilterControl
-          label="Фильтр по лайкам"
-          value={likesFilter}
-          options={[
-            { value: 0, label: "До 10 лайков" },
-            { value: 1, label: "10-100 лайков" },
-            { value: 2, label: "Более 100 лайков" },
-          ]}
-          onChange={(event) =>
-            setLikesFilter(
-              event.target.value === "" ? "" : Number(event.target.value),
-            )
-          }
-        />
-      </div>
-
-      <AdList ads={currentAds} />
-
-      <div className={styles.paginationWrapper}>
-        {totalPages > 0 && (
-          <>
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
+          <div className={styles.filtersWrapper}>
+            <FilterControl
+              label="Фильтр по цене"
+              value={priceFilter}
+              options={[
+                { value: 0, label: "До 1000 ₽" },
+                { value: 1, label: "1000-5000 ₽" },
+                { value: 2, label: "Более 5000 ₽" },
+              ]}
+              onChange={(event) =>
+                setPriceFilter(
+                  event.target.value === "" ? "" : Number(event.target.value),
+                )
+              }
             />
-            <AdsPerPageSelector
-              adsPerPage={adsPerPage}
-              onAdsPerPageChange={handleAdsPerPageChange}
+
+            <FilterControl
+              label="Фильтр по просмотрам"
+              value={viewsFilter}
+              options={[
+                { value: 0, label: "До 100 просмотров" },
+                { value: 1, label: "100-1000 просмотров" },
+                { value: 2, label: "Более 1000 просмотров" },
+              ]}
+              onChange={(event) =>
+                setViewsFilter(
+                  event.target.value === "" ? "" : Number(event.target.value),
+                )
+              }
             />
-          </>
-        )}
-      </div>
-    </div>
+
+            <FilterControl
+              label="Фильтр по лайкам"
+              value={likesFilter}
+              options={[
+                { value: 0, label: "До 10 лайков" },
+                { value: 1, label: "10-100 лайков" },
+                { value: 2, label: "Более 100 лайков" },
+              ]}
+              onChange={(event) =>
+                setLikesFilter(
+                  event.target.value === "" ? "" : Number(event.target.value),
+                )
+              }
+            />
+          </div>
+
+          <AdList ads={currentAds} />
+
+          <div className={styles.paginationWrapper}>
+            {totalPages > 0 && (
+              <>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+                <AdsPerPageSelector
+                  adsPerPage={adsPerPage}
+                  onAdsPerPageChange={handleAdsPerPageChange}
+                />
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -8,11 +8,12 @@ import Pagination from "../../components/Pagination/Pagination";
 import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
 import { useSearchParams } from "react-router-dom";
 import styles from "./OrdersPage.module.scss";
+import Loader from "../../components/Loader/Loader";
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<number | "">("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,7 +24,7 @@ const OrdersPage: React.FC = () => {
   const advertName = searchParams.get("name");
 
   const loadOrders = async (sortByPrice: boolean = false) => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const fetchedOrders = await fetchOrders(
         sortByPrice ? "total" : undefined,
@@ -37,10 +38,10 @@ const OrdersPage: React.FC = () => {
         : fetchedOrders;
 
       setFilteredOrders(filtered);
-      setLoading(false);
+      setIsLoading(false);
     } catch (err) {
       setError("Ошибка при загрузке заказов");
-      setLoading(false);
+      setIsLoading(false);
       console.error(err);
     }
   };
@@ -87,72 +88,70 @@ const OrdersPage: React.FC = () => {
     setCurrentPage(1);
   };
 
-  if (loading) {
-    return <div>Загрузка заказов...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   const isItemFound = filteredOrders.length > 0;
 
   return (
-    <div className={styles.orderPageWrapper}>
-      <h1>Список заказов</h1>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.orderPageWrapper}>
+          <h1>Список заказов</h1>
 
-      <FilterControl
-        label="Фильтр по статусу"
-        value={statusFilter}
-        options={[
-          { value: 0, label: "Создан" },
-          { value: 1, label: "Оплачен" },
-          { value: 2, label: "В пути" },
-          { value: 3, label: "Доставлен в пункт" },
-          { value: 4, label: "Получен" },
-          { value: 5, label: "Архивирован" },
-          { value: 6, label: "Возврат" },
-        ]}
-        onChange={handleStatusFilterChange}
-      />
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleSortByPrice}
-        className={styles.sortButton}
-      >
-        Сортировать по цене
-      </Button>
-
-      {advertName && (
-        <p>
-          {isItemFound
-            ? `Предмет "${advertName}" был найден в этих заказах`
-            : `Этот предмет "${advertName}" не был найден ни в одном заказе`}
-        </p>
-      )}
-
-      <OrderList
-        orders={orders}
-        filteredOrders={currentOrders}
-        onCompleteOrder={handleCompleteOrder}
-      />
-
-      <div style={{ marginTop: "20px" }}>
-        {totalPages > 0 && (
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
+          <FilterControl
+            label="Фильтр по статусу"
+            value={statusFilter}
+            options={[
+              { value: 0, label: "Создан" },
+              { value: 1, label: "Оплачен" },
+              { value: 2, label: "В пути" },
+              { value: 3, label: "Доставлен в пункт" },
+              { value: 4, label: "Получен" },
+              { value: 5, label: "Архивирован" },
+              { value: 6, label: "Возврат" },
+            ]}
+            onChange={handleStatusFilterChange}
           />
-        )}
-        <AdsPerPageSelector
-          adsPerPage={ordersPerPage}
-          onAdsPerPageChange={handleOrdersPerPageChange}
-        />
-      </div>
-    </div>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSortByPrice}
+            className={styles.sortButton}
+          >
+            Сортировать по цене
+          </Button>
+
+          {advertName && (
+            <p>
+              {isItemFound
+                ? `Предмет "${advertName}" был найден в этих заказах`
+                : `Этот предмет "${advertName}" не был найден ни в одном заказе`}
+            </p>
+          )}
+
+          <OrderList
+            orders={orders}
+            filteredOrders={currentOrders}
+            onCompleteOrder={handleCompleteOrder}
+          />
+
+          <div style={{ marginTop: "20px" }}>
+            {totalPages > 0 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            )}
+            <AdsPerPageSelector
+              adsPerPage={ordersPerPage}
+              onAdsPerPageChange={handleOrdersPerPageChange}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
