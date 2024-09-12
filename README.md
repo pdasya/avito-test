@@ -25,8 +25,8 @@
 
 4. **Замените .env.example**
 
-- Rename .env.example to .env
-- Add valid server api
+- Замените .env.example на .env
+- Добавьте имя валидного API сервера
 
 5. **Запустите dev сервер**
 
