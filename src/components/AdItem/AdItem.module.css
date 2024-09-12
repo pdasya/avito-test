@@ -1,10 +1,11 @@
 .cardWrapper {
-  max-width: 300px;
+  width: 300px;
   height: 530px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  padding: 10px;
 }
 
 .cardWrapper:hover {
@@ -23,4 +24,9 @@
 .iconContainer {
   display: flex;
   align-items: center;
+}
+
+.cardImage {
+  width: 250px;
+  height: 250px;
 }
