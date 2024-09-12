@@ -1,0 +1,43 @@
+.footerWrapper {
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: #d6cbc9;
+  padding: 10px 0;
+}
+
+.footerGithub {
+  color: black;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+
+  &Image {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.footerAvitoImage {
+  width: 50px;
+  height: 50px;
+}
+
+@media screen and (max-width: 360px) {
+  .footerWrapper {
+    display: none;
+  }
+}
+
+.footerYear {
+  color: black;
+}

@@ -9,6 +9,8 @@ import AdPage from "./views/adverticements/AdPage";
 import AdDetail from "./components/AdDetail/AdDetail";
 import NavigationBar from "./components/Navigation/Navigation";
 import OrdersPage from "./views/orders/OrdersPage";
+import Footer from "./components/Footer/Footer";
+import "./App.css";
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path="/advertisements/:id" element={<AdDetail />} />
         <Route path="/orders" element={<OrdersPage />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
