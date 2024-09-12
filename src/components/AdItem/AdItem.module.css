@@ -1,8 +1,23 @@
+.cardWrapper {
+  max-width: 300px;
+  height: 530px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cardWrapper:hover {
+  cursor: pointer;
+}
+
 .cardContent {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
+  width: 200px;
 }
 
 .iconContainer {

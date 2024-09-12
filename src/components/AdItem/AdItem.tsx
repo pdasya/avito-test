@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -17,17 +17,28 @@ const AdItem: React.FC<Advertisment> = ({
   views,
   likes,
 }) => {
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const handleFavoriteClick = () => {
+    setIsFavorited(!isFavorited);
+  };
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component="img" height="140" image={imageUrl} alt={name} />
-      <CardContent>
+    <Card className={styles.cardWrapper}>
+      <CardMedia
+        component="img"
+        image={imageUrl}
+        alt={name}
+        className={styles.cardImage}
+      />
+      <CardContent className={styles.cardContent}>
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Стоимость: {price} ₽
         </Typography>
-        <div className={styles.cardContent}>
+        <div>
           <div className={styles.iconContainer}>
             <IconButton aria-label="views">
               <Visibility />
@@ -37,8 +48,8 @@ const AdItem: React.FC<Advertisment> = ({
             </Typography>
           </div>
           <div className={styles.iconContainer}>
-            <IconButton aria-label="likes">
-              <Favorite />
+            <IconButton aria-label="likes" onClick={handleFavoriteClick}>
+              <Favorite sx={{ color: isFavorited ? "red" : "gray" }} />
             </IconButton>
             <Typography variant="body2" color="text.secondary">
               {likes} лайков
