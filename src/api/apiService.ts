@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Advertisment, Order } from "../../types";
+import { Advertisment, Order } from "../types/types";
 
 class ApiService {
   private baseUrl: string;

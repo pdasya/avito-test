@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import AdItem from "../AdItem/AdItem";
-import { Advertisment } from "../../../types";
 import styles from "./AdList.module.scss";
+import { Advertisment } from "@/types/types";
 
 interface AdListProps {
   ads: Advertisment[];

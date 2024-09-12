@@ -5,11 +5,11 @@ import {
   Routes,
 } from "react-router-dom";
 import "./App.scss";
-import AdPage from "./views/adverticements/AdPage";
-import AdDetail from "./components/AdDetail/AdDetail";
-import NavigationBar from "./components/Navigation/Navigation";
-import OrdersPage from "./views/orders/OrdersPage";
-import Footer from "./components/Footer/Footer";
+import NavigationBar from "@components/Navigation/Navigation";
+import AdPage from "@views/adverticements/AdPage";
+import AdDetail from "@components/AdDetail/AdDetail";
+import OrdersPage from "@views/orders/OrdersPage";
+import Footer from "@components/Footer/Footer";
 
 function App() {
   return (

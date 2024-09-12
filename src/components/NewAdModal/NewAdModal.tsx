@@ -7,10 +7,10 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { Advertisment } from "../../../types";
 import axios from "axios";
-import getNextAdId from "../../utils/getNextAdId";
 import { toast } from "react-toastify";
+import getNextAdId from "@utils/getNextAdId";
+import { Advertisment } from "@/types/types";
 
 interface CreateAdModalProps {
   open: boolean;

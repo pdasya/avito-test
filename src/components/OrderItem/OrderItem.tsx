@@ -13,8 +13,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Order } from "../../../types";
 import styles from "./OrderItem.module.scss";
+import { Order } from "@/types/types";
 
 interface OrderItemProps {
   order: Order;

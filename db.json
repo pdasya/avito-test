@@ -97,6 +97,16 @@
       "views": 0,
       "likes": 0,
       "imageUrl": "/no-image.svg"
+    },
+    {
+      "id": "11",
+      "name": "Котик",
+      "description": "Сладкий",
+      "price": 55555,
+      "createdAt": "2024-09-12T08:34:08.793Z",
+      "views": 0,
+      "likes": 0,
+      "imageUrl": "https://img.freepik.com/free-photo/cute-ai-generated-cartoon-bunny_23-2150288872.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1725840000&semt=ais_hybrid"
     }
   ],
   "orders": [

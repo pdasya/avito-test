@@ -1,7 +1,7 @@
 import React from "react";
-import { Order } from "../../../types";
 import { Grid } from "@mui/material";
 import OrderItem from "../OrderItem/OrderItem";
+import { Order } from "@/types/types";
 
 interface OrderListProps {
   orders: Order[];

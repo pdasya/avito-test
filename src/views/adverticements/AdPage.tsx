@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import AdList from "../../components/AdList/AdList";
-import { Advertisment } from "../../../types";
-import apiService from "../../api/apiService";
 import { Button, SelectChangeEvent } from "@mui/material";
 import styles from "./AdPage.module.scss";
-import Pagination from "../../components/Pagination/Pagination";
-import CreateAdModal from "../../components/NewAdModal/NewAdModal";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
-import FilterControl from "../../components/FilterControl/FilterControl";
-import Loader from "../../components/Loader/Loader";
+import { Advertisment } from "@/types/types";
+import apiService from "@api/apiService";
+import Loader from "@components/Loader/Loader";
+import CreateAdModal from "@components/NewAdModal/NewAdModal";
+import SearchBar from "@components/SearchBar/SearchBar";
+import FilterControl from "@components/FilterControl/FilterControl";
+import AdList from "@components/AdList/AdList";
+import Pagination from "@components/Pagination/Pagination";
+import AdsPerPageSelector from "@components/AdPerPageSelector/AdPerPageSelector";
 
 const AdPage: React.FC = () => {
   const [ads, setAds] = useState<Advertisment[]>([]);

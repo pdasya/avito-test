@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Order } from "../../../types";
 import { Button, SelectChangeEvent } from "@mui/material";
-import OrderList from "../../components/OrderList/OrderList";
-import apiService from "../../api/apiService";
-import FilterControl from "../../components/FilterControl/FilterControl";
-import Pagination from "../../components/Pagination/Pagination";
-import AdsPerPageSelector from "../../components/AdPerPageSelector/AdPerPageSelector";
 import { useSearchParams } from "react-router-dom";
 import styles from "./OrdersPage.module.scss";
-import Loader from "../../components/Loader/Loader";
 import { toast } from "react-toastify";
+import { Order } from "@/types/types";
+import apiService from "@api/apiService";
+import Loader from "@components/Loader/Loader";
+import FilterControl from "@components/FilterControl/FilterControl";
+import OrderList from "@components/OrderList/OrderList";
+import Pagination from "@components/Pagination/Pagination";
+import AdsPerPageSelector from "@components/AdPerPageSelector/AdPerPageSelector";
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);

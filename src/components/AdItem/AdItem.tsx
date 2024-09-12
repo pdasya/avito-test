@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { Favorite, Visibility } from "@mui/icons-material";
 import styles from "./AdItem.module.scss";
-import { Advertisment } from "../../../types";
 import { useNavigate } from "react-router-dom";
+import { Advertisment } from "@/types/types";
 
 const AdItem: React.FC<Advertisment> = ({
   imageUrl,

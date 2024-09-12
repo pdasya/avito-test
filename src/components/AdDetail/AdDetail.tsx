@@ -1,7 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Advertisment } from "../../../types";
-import apiService from "../../api/apiService";
 import axios from "axios";
 import {
   TextField,
@@ -13,6 +11,8 @@ import {
 import styles from "./AdDetails.module.scss";
 import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
+import apiService from "@api/apiService";
+import { Advertisment } from "@/types/types";
 
 const AdDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
