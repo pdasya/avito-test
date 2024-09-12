@@ -10,6 +10,7 @@ import FilterControl from "@components/FilterControl/FilterControl";
 import AdList from "@components/AdList/AdList";
 import Pagination from "@components/Pagination/Pagination";
 import AdsPerPageSelector from "@components/AdPerPageSelector/AdPerPageSelector";
+import { useDebounce } from "@/hooks/useDebounce"; // Подключаем наш хук
 
 const AdPage: React.FC = () => {
   const [ads, setAds] = useState<Advertisment[]>([]);
@@ -22,6 +23,9 @@ const AdPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // Дебаунс для searchQuery
+  const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
   useEffect(() => {
     const loadAds = async () => {
       setIsLoading(true);
@@ -33,12 +37,19 @@ const AdPage: React.FC = () => {
     loadAds();
   }, []);
 
+  useEffect(() => {
+    // Поиск будет срабатывать только при изменении debouncedSearchQuery
+    setCurrentPage(1); // Сбрасываем страницу
+  }, [debouncedSearchQuery]);
+
   const handleCreateAd = (newAd: Advertisment) => {
     setAds((prevAds) => [...prevAds, newAd]);
   };
 
   const filteredAds = ads
-    .filter((ad) => ad.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    .filter((ad) =>
+      ad.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase()),
+    ) // Используем debouncedSearchQuery
     .filter((ad) => {
       if (priceFilter !== "") {
         if (priceFilter === 0) return ad.price < 1000;
@@ -81,7 +92,6 @@ const AdPage: React.FC = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
-    setCurrentPage(1);
   };
 
   const handleOpenModal = () => {
